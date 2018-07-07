@@ -45,9 +45,12 @@ def calculate_hash(data: List[dict] or dict):
             # If we can't calculate the hash of a type, use all of non-metadata
             # properties for the hash
             h = mmh3.hash128("#".join(
-                x for x in d.items() if not x.startswith("_"))
+                y for x, y in d.items() if not x.startswith("_"))
             )
 
         carry.append(h)
 
     return mmh3.hash128("#".join(str(x) for x in carry))
+
+
+__all__ = ("calculate_hash",)
